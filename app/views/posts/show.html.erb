@@ -1,0 +1,21 @@
+<section class='single-post-show'>
+  <% if @post.photo.attached? %>
+    <%= image_tag @post.photo, style: 'width: 200px;' %>
+  <% end %>
+  <%= @post.caption %>
+
+  <div class='comment-form'>
+    <%= form_with(model: [@post, @comment]) do |f| %>  <%# Because it wrapped with post. Comment.new can be change using instance variable. Create new post use .new %>
+    <%= f.text_field :content , placeholder: 'Write your comment here' %>
+    <%= f.submit 'Comment' %>
+    <% end %>
+  </div>
+
+  <div class='post-comments'>
+    <% @comments.each do |comment| %>   <%# @post.comments.each do |comment| %>
+    <p>User: <%= comment.user.username%> </p> <%# to show which user actually comment this%>
+    <br>
+    <p>Comment: <%= comment.content %></p> <%# we can also put on posts_controller %>
+    <% end %>
+  </div>
+</section>
