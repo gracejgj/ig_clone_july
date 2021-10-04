@@ -3,7 +3,10 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @post = Post.new
     @posts = @user.posts
-  end
+
+    @new_relationship = Relationship.new #when a form submit, it will send a request to relationship, create action
+    @find_relationship = current_user.active_relationships.find_by(following_id: @user.id)
+  end  #can be seen in form when inpect elements
 
   def edit
     @user = User.find(params[:id])
@@ -14,10 +17,17 @@ class UsersController < ApplicationController
     @user.update(user_params) #update user if validation pass
 
     if @user.save
-      redirect_to user_path(@user), notice: 'Your profile was updated.'
+      redirect_to user_path(@user), notice: 'Your profile was successfully updated.'
     else
       render :edit
     end
+  end
+
+  def followings
+    @user = User.find(params[:id])
+  end
+
+  def followers
   end
 
   private

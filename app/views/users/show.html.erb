@@ -12,6 +12,19 @@
     <p>Birth: <%= @user.birth_date %></p>
   </div>
 
+  <div class='follow-unfollow'>
+    <% if current_user.followings.include?(@user) %> <%#ruby method if user 2 is inside the array %>
+      <%= form_with(model: @find_relationship, html: { method: :delete }) do |f| %>
+        <%= f.submit 'Unfollow' %> <%# @find_relationship instance var can be find at users_controller %>
+      <% end %>
+    <% else %>
+      <%= form_with(model: @new_relationship) do |f| %>
+        <%= hidden_field_tag :following_id, @user.id %> <%# text_field_tag @user.id show the current user visting %>
+        <%= f.submit 'Follow' %>
+      <% end %>
+    <% end %>
+  </div>
+
  <% if current_user == @user %> <%# to avoid current user to create a posts in profile page%>
   <%= form_for @post do |f| %>
     <%= render 'shared/error_message', object: @post %>
@@ -30,7 +43,7 @@
       <%= link_to 'Show', post_path(post) %> <%# create show action method in post controller %>
        <% if current_user == @user %>
       <%= link_to 'Edit', edit_post_path(post) %>
-      <%= link_to 'Delete', post_path(post), method: :delete %> <%# find path at rails routes -g posts %>
+      <%= link_to 'Delete', post_path(post), method: :delete, data: { confirm: 'Are you sure?' } %> <%# find path at rails routes -g posts %>
     <% end %>
     <% end %>
    <%# get the post which belong to the user %>
