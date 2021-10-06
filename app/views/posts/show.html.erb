@@ -1,21 +1,43 @@
-<section class='single-post-show'>
-  <% if @post.photo.attached? %>
-    <%= image_tag @post.photo, style: 'width: 200px;' %>
-  <% end %>
-  <%= @post.caption %>
+<div class='container my-5'>
+  <div class="card">
+    <div class="card-body my-3 mx-3">
+      <h3 class="feature-title pb-2">Post</h3>
 
-  <div class='comment-form'>
-    <%= form_with(model: [@post, @comment]) do |f| %>  <%# Because it wrapped with post. Comment.new can be change using instance variable. Create new post use .new %>
-    <%= f.text_field :content , placeholder: 'Write your comment here' %>
-    <%= f.submit 'Comment' %>
-    <% end %>
-  </div>
+      <form class="row g-2">
+        <div class="col-auto">
+          <% if @post.photo.attached? %>
+            <%= image_tag @post.photo, style: 'width: 200px;' %>
+          <% end %>
+        </div>
+        <div class="col-auto">
+          <%= @post.caption %>
+        </div>
+      </form>
+<br/>
+      <form class="row g-2">
+        <div class="col-auto">
+          <%= form_with(model: [@post, @comment]) do |f| %>
+          <%# Because it wrapped with post. Comment.new can be change using instance variable. Create new post use .new %>
+            <%= f.text_field :content , placeholder: 'Write your comment here', class:"form-control" %>
+          </div>
+          <div class="col-auto">
+            <%= f.submit 'Comment', class: "btn btn-primary" %>
+          <% end %>
+        </div>
+      </form>
 
-  <div class='post-comments'>
-    <% @comments.each do |comment| %>   <%# @post.comments.each do |comment| %>
-    <p>User: <%= comment.user.username%> </p> <%# to show which user actually comment this%>
-    <br>
-    <p>Comment: <%= comment.content %></p> <%# we can also put on posts_controller %>
-    <% end %>
-  </div>
-</section>
+      <div class='post-comments'>
+        <% @comments.each do |comment| %>
+          <%# @post.comments.each do |comment| %>
+            <p>User:
+              <%= comment.user.username %>
+            </p>
+            <%# to show which user actually comment this%>
+              <br>
+              <p>Comment:
+                <%= comment.content %></p>
+              <%# we can also put on posts_controller %><% end %>
+            </div>
+          </div>
+        </div>
+      </div>

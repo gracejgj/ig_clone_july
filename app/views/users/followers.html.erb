@@ -1,5 +1,12 @@
-<h1>This is user's follower details</h1>
+<div class='container my-5'>
+  <div class="card">
+    <div class="card-body my-3 mx-3">
+      <h3 class="feature-title pb-2">
+        This is user's follower details</h3>
 
-<% @user.followers.each do |user| %>
-  <%= link_to "#{user.username}", user_path(user) %>
-<% end %>
+      <% @user.followers.each do |user| %>
+        <%= link_to "#{user.username}", user_path(user) %>
+      <% end %>
+    </div>
+  </div>
+</div>

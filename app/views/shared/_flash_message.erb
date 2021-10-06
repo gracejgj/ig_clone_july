@@ -1,8 +1,7 @@
-<section class='flash-message'>
-  <% flash.each do |key, value| %>
+<% flash.each do |key, value| %>
+  <div class="alert alert-primary alert-dismissible fade show text-center" role="alert">
     <%= value %>
   <% end %>
-</section>
-
+</div>
 
 <%# key is the notice & alert at post_controller.rb && value is the message %>

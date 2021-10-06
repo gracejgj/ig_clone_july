@@ -1,10 +1,21 @@
-<h1>This is search page</h1>
+<div class='container my-5'>
+  <div class="card">
+    <div class="card-body my-3 mx-3">
+      <h3 class="feature-title pb-2">This is search page</h3>
 
-<%= form_with(url: search_path, method: :get) do |f| %>
-  <%= text_field_tag :search %>
-  <%= f.submit 'Search' %>
-<% end %>
-
-<% @users.each do |user| %>
-  <%= link_to "#{user.username}", user_path(user) %>
-<% end %>
+        <form class="row g-2">
+          <div class="col-auto">
+            <%= form_with(url: search_path, method: :get) do |f| %>
+          <input class="form-control" <%= text_field_tag :search %></input>
+          </div>
+          <div class="col-auto">
+            <%= f.submit 'Search',class: "btn btn-secondary" %>
+          <% end %>
+          </div>
+        <% @users.each do |user| %>
+          <%= link_to "#{user.username}", user_path(user) %>
+        <% end %>
+      </form>
+    </div>
+  </div>
+</div>
