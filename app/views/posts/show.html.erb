@@ -3,41 +3,39 @@
     <div class="card-body my-3 mx-3">
       <h3 class="feature-title pb-2">Post</h3>
 
-      <form class="row g-2">
-        <div class="col-auto">
+      <form>
+        <div class="mb-3">
           <% if @post.photo.attached? %>
             <%= image_tag @post.photo, style: 'width: 200px;' %>
           <% end %>
         </div>
-        <div class="col-auto">
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Caption:</label>
           <%= @post.caption %>
         </div>
       </form>
-<br/>
-      <form class="row g-2">
-        <div class="col-auto">
-          <%= form_with(model: [@post, @comment]) do |f| %>
-          <%# Because it wrapped with post. Comment.new can be change using instance variable. Create new post use .new %>
-            <%= f.text_field :content , placeholder: 'Write your comment here', class:"form-control" %>
-          </div>
-          <div class="col-auto">
-            <%= f.submit 'Comment', class: "btn btn-primary" %>
-          <% end %>
-        </div>
-      </form>
 
-      <div class='post-comments'>
-        <% @comments.each do |comment| %>
-          <%# @post.comments.each do |comment| %>
-            <p>User:
-              <%= comment.user.username %>
-            </p>
+      <%= form_with(model: [@post, @comment]) do |f| %>
+      <%# Because it wrapped with post. Comment.new can be change using instance variable. Create new post use .new %>
+        <div class="mb-3">
+          <%= f.text_field :content , placeholder: 'Write your comment here', class:"form-control" %>
+        </div>
+        <div class="mb-3">
+          <%= f.submit 'Comment', class: "btn btn-primary" %>
+        <% end %>
+      </div>
+
+      <% @comments.each do |comment| %>
+        <%# @post.comments.each do |comment| %>
+
+          <p>User:
+            <%= comment.user.username %>
+
             <%# to show which user actually comment this%>
-              <br>
               <p>Comment:
                 <%= comment.content %></p>
               <%# we can also put on posts_controller %><% end %>
+
             </div>
           </div>
         </div>
-      </div>

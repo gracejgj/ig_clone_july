@@ -33,7 +33,7 @@
             <% if current_user.followings.include?(@user) %>
               <%#ruby method if user 2 is inside the array %>
                 <%= form_with(model: @find_relationship, html: { method: :delete }) do |f| %>
-                <%= f.submit 'Unfollow' %>
+                <%= f.submit 'Unfollow', class: "btn btn-outline-secondary"  %>
                 <%# @find_relationship instance var can be find at users_controller %><% end %>
               <% else %>
                 <%= form_with(model: @new_relationship) do |f| %>
