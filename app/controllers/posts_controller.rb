@@ -14,6 +14,7 @@ class PostsController <ApplicationController
   def show #need to find param id from routes
     @comment = Comment.new
     @comments = @post.comments
+    @posts = Post.order(:comments).page(params[:page]).per(2)
   end
 
   def edit

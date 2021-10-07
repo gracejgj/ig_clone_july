@@ -9,6 +9,7 @@
             <%= image_tag @post.photo, style: 'width: 200px;' %>
           <% end %>
         </div>
+
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Caption:</label>
           <%= @post.caption %>
@@ -22,20 +23,18 @@
         </div>
         <div class="mb-3">
           <%= f.submit 'Comment', class: "btn btn-primary" %>
-        <% end %>
-      </div>
+        </div>
+      <% end %>
 
       <% @comments.each do |comment| %>
-        <%# @post.comments.each do |comment| %>
+        <p>User: <%= comment.user.username %>
+          <%# to show which user actually comment this%>
+            <p>Comment: <%= comment.content %></p>
+            <%# we can also put on posts_controller %>
+            <% end %>
 
-          <p>User:
-            <%= comment.user.username %>
+          <%= paginate @posts %>
 
-            <%# to show which user actually comment this%>
-              <p>Comment:
-                <%= comment.content %></p>
-              <%# we can also put on posts_controller %><% end %>
-
-            </div>
-          </div>
         </div>
+      </div>
+    </div>
